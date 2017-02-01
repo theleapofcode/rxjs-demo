@@ -3,21 +3,16 @@
   "version": "1.0.0",
   "description": "Demo for RxJS",
   "scripts": {
-    "srcserver:start": "babel-node buildScripts/srcServer.js",
+    "nodedemo": "babel-node server/examples.js",
+    "browserdemo": "babel-node buildScripts/srcServer.js",
     "start": "npm-run-all --parallel srcserver:start lint:watch test:watch mockapi:start",
-    "localtunnel": "lt --port 3000",
-    "share": "npm-run-all --parallel start localtunnel",
-    "lint": "esw webpack.config.*, src, buildScripts --color",
+    "lint": "esw webpack.config.*, public, server, buildScripts --color",
     "lint:watch": "npm run lint -- --watch",
-    "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
+    "test": "mocha --reporter progress buildScripts/testSetup.js \"**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
     "mockdata:generate": "babel-node buildScripts/generateMockData.js",
     "premockapi:start": "npm run mockdata:generate",
-    "mockapi:start": "json-server --watch src/api/db.json --port 3001",
-    "dist:clean": "rimraf ./dist && mkdir dist",
-    "prebuild": "npm-run-all dist:clean test lint",
-    "build": "babel-node buildScripts/build.js",
-    "postbuild": "babel-node buildScripts/distServer.js"
+    "mockapi:start": "json-server --watch src/api/db.json --port 3001"
   },
   "repository": {
     "type": "git",
@@ -53,7 +48,6 @@
     "jsdom": "^9.9.1",
     "json-schema-faker": "^0.4.0",
     "json-server": "^0.9.4",
-    "localtunnel": "^1.8.2",
     "mocha": "^3.2.0",
     "npm-run-all": "^3.1.2",
     "open": "0.0.5",
@@ -65,6 +59,7 @@
     "webpack-md5-hash": "0.0.5"
   },
   "dependencies": {
+    "promise": "^7.1.1",
     "rxjs": "^5.0.3"
   }
 }
