@@ -1,7 +1,7 @@
 import './index.css';
 
 import Rx from 'rx';
-import RxDom from 'rx-dom';
+import 'rx-dom';
 
 // Observable from DOM event
 Rx.Observable.fromEvent(document, 'click')
@@ -12,7 +12,7 @@ Rx.Observable.fromEvent(document, 'click')
 // Ajax call
 const getUsersButton = document.getElementById('getusers');
 Rx.Observable.fromEvent(getUsersButton, 'click')
-  .subscribe(() => RxDom.DOM.get('/users')
+  .subscribe(() => Rx.DOM.get('/users')
     .subscribe(data => console.log(data.response)));
 
 // Ajax call cache using AsyncSubject
@@ -24,7 +24,7 @@ function getUsers(url) {
   return Rx.Observable.create(observer => {
     if (!subject) {
       subject = new Rx.AsyncSubject();
-      RxDom.DOM.get(url).subscribe(subject);
+      Rx.DOM.get(url).subscribe(subject);
     }
 
     return subject.subscribe(observer);
