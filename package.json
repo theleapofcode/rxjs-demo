@@ -9,10 +9,7 @@
     "lint": "esw webpack.config.*, public, server, buildScripts --color",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress buildScripts/testSetup.js \"**/*.test.js\"",
-    "test:watch": "npm run test -- --watch",
-    "mockdata:generate": "babel-node buildScripts/generateMockData.js",
-    "premockapi:start": "npm run mockdata:generate",
-    "mockapi:start": "json-server --watch src/api/db.json --port 3001"
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -46,8 +43,6 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.24.1",
     "jsdom": "^9.9.1",
-    "json-schema-faker": "^0.4.0",
-    "json-server": "^0.9.4",
     "mocha": "^3.2.0",
     "npm-run-all": "^3.1.2",
     "open": "0.0.5",

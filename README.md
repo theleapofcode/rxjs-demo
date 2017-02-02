@@ -6,6 +6,7 @@ Run the browser demo `npm run browserdemo -s`.
 
 * Click on right side of window to print co-ordinates in console.
 * Click on 'Get Data' button to make ajax call to backend and print JSON data in console.
+* Click on 'Get Data (cache)' button to make ajax call only once to server and cache the response. JSON response is printed in console. Subsequent clicks gets the data from cache and not from server. Check the network tab in dev console to verify.
 
 ## Node demo
 Run the node demo `npm run nodedemo -s <option>`
@@ -24,3 +25,5 @@ Run the node demo `npm run nodedemo -s <option>`
   11. Unsubscribe
   12. Handling error - fail
   13. Handling error - complete
+  14. Subject as a proxy
+  15. Replay subject

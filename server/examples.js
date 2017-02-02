@@ -175,6 +175,52 @@ switch (num) {
     break;
   }
 
+  case '14': {
+    console.log('Subject as a proxy :');
+
+    const subject = new Rx.Subject();
+
+    const source = Rx.Observable.interval(300)
+      .map(i => 'From source -  ' + i)
+      .take(5);
+
+    source.subscribe(subject);
+
+    subject.subscribe(
+      x => console.log(x),
+      err => console.log(err.message),
+      () => console.log('Done...')
+    );
+
+    subject.onNext('From Subject - 1');
+    subject.onNext('From Subject - 2');
+    setTimeout(function () {
+      subject.onCompleted();
+    }, 1000);
+
+    break;
+  }
+
+  case '15': {
+    console.log('ReplaySubject to cache and re-emit values:');
+
+    const replaySub = new Rx.ReplaySubject(); // This can also take buffer size and buffer time for caching
+
+    replaySub.onNext(1);
+    replaySub.onNext(2);
+
+    replaySub.subscribe(
+      x => console.log(x),
+      err => console.log(err),
+      () => console.log('Done...')
+    );
+
+    replaySub.onNext(3);
+    replaySub.onNext(4);
+
+    break;
+  }
+
   default:
     break;
 }

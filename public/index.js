@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import './index.css';
 
 import Rx from 'rx';
@@ -14,5 +12,30 @@ Rx.Observable.fromEvent(document, 'click')
 // Ajax call
 const getUsersButton = document.getElementById('getusers');
 Rx.Observable.fromEvent(getUsersButton, 'click')
-  .subscribe(e => RxDom.DOM.get('/users')
+  .subscribe(() => RxDom.DOM.get('/users')
     .subscribe(data => console.log(data.response)));
+
+// Ajax call cache using AsyncSubject
+const getUsersCacheButton = document.getElementById('getuserscache');
+
+function getUsers(url) {
+  let subject;
+
+  return Rx.Observable.create(observer => {
+    if (!subject) {
+      subject = new Rx.AsyncSubject();
+      RxDom.DOM.get(url).subscribe(subject);
+    }
+
+    return subject.subscribe(observer);
+  });
+}
+
+const users = getUsers('/users');
+
+Rx.Observable.fromEvent(getUsersCacheButton, 'click')
+  .subscribe(() => users.subscribe(
+    data => console.log(data.response),
+    err => console.log(err.message),
+    () => console.log('Done...')
+  ));
