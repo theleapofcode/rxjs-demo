@@ -3,6 +3,7 @@
 import './index.css';
 
 import Rx from 'rx';
+import RxDom from 'rx-dom';
 
 // Observable from DOM event
 Rx.Observable.fromEvent(document, 'click')
@@ -13,5 +14,5 @@ Rx.Observable.fromEvent(document, 'click')
 // Ajax call
 const getUsersButton = document.getElementById('getusers');
 Rx.Observable.fromEvent(getUsersButton, 'click')
-  .subscribe(e => Rx.DOM.get('/users')
+  .subscribe(e => RxDom.DOM.get('/users')
     .subscribe(data => console.log(data.response)));
